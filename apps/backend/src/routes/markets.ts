@@ -15,7 +15,7 @@ const getGeminiService = () => {
 
 /**
  * Markets Routes
- * Handles prediction market operations via Story contracts
+ * Handles prediction market operations via blockchain contracts
  */
 
 /**

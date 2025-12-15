@@ -1,7 +1,7 @@
 /**
- * Story Contracts Service
+ * Blockchain Contracts Service
  *
- * Handles interactions with Story Aeneid testnet smart contracts
+ * Handles interactions with Polygon Amoy testnet smart contracts
  */
 
 import {
@@ -20,7 +20,7 @@ import { predictionMarketAbi, videoRegistryAbi } from "../types/generated";
 
 // Chain configuration helper - called at runtime when env vars are loaded
 function getChainConfig() {
-  const rpcUrl = process.env.STORY_RPC_URL || "";
+  const rpcUrl = process.env.POLYGON_RPC_URL || "";
   const isLocalDev = rpcUrl.includes("localhost") || rpcUrl.includes("127.0.0.1");
 
   // Local Anvil chain configuration
@@ -39,23 +39,23 @@ function getChainConfig() {
     },
   } as const;
 
-  // Story Aeneid testnet chain configuration
-  const storyAeneid = {
-    id: 1315,
-    name: "Story Aeneid Testnet",
+  // Polygon Amoy testnet chain configuration
+  const polygonAmoy = {
+    id: 80002,
+    name: "Polygon Amoy",
     nativeCurrency: {
-      name: "IP",
-      symbol: "IP",
+      name: "POL",
+      symbol: "POL",
       decimals: 18,
     },
     rpcUrls: {
       default: {
-        http: [rpcUrl || "https://rpc.ankr.com/story_aeneid_testnet"],
+        http: [rpcUrl || "https://rpc-amoy.polygon.technology"],
       },
     },
   } as const;
 
-  return isLocalDev ? localAnvil : storyAeneid;
+  return isLocalDev ? localAnvil : polygonAmoy;
 }
 
 // Type definitions
@@ -93,9 +93,9 @@ interface Market {
 }
 
 /**
- * Story Contracts Service
+ * Blockchain Contracts Service
  *
- * Provides read and write access to Story smart contracts
+ * Provides read and write access to smart contracts
  */
 export class ContractsService {
   private publicClient: PublicClient;
@@ -114,8 +114,8 @@ export class ContractsService {
 
   constructor() {
     // Validate environment variables
-    if (!process.env.STORY_RPC_URL) {
-      console.warn("⚠️  STORY_RPC_URL not set, using default");
+    if (!process.env.POLYGON_RPC_URL) {
+      console.warn("⚠️  POLYGON_RPC_URL not set, using default");
     }
 
     if (!process.env.BACKEND_WALLET_PRIVATE_KEY) {
@@ -145,11 +145,11 @@ export class ContractsService {
 
     // Create clients - use activeChain for automatic local/production switching
     console.log(`🔗 Using chain: ${activeChain.name} (ID: ${activeChain.id})`);
-    console.log(`   RPC URL: ${process.env.STORY_RPC_URL}`);
+    console.log(`   RPC URL: ${process.env.POLYGON_RPC_URL}`);
 
     this.publicClient = createPublicClient({
       chain: activeChain,
-      transport: http(process.env.STORY_RPC_URL),
+      transport: http(process.env.POLYGON_RPC_URL),
     }) as any;
 
     const account = privateKeyToAccount(
@@ -159,7 +159,7 @@ export class ContractsService {
     this.walletClient = createWalletClient({
       account,
       chain: activeChain,
-      transport: http(process.env.STORY_RPC_URL),
+      transport: http(process.env.POLYGON_RPC_URL),
     }) as any;
 
     console.log("✅ ContractsService initialized");
