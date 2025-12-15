@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Story Aeneid Testnet Deployment Script
+# Polygon Amoy Testnet Deployment Script
 
 set -e
 
-RPC_URL="https://rpc.ankr.com/story_aeneid_testnet"
-CHAIN_ID="1315"
+RPC_URL="https://rpc-amoy.polygon.technology"
+CHAIN_ID="80002"
 
 # Check if private key is set
 if [ -z "$DEPLOYER_PRIVATE_KEY" ]; then
@@ -14,7 +14,7 @@ if [ -z "$DEPLOYER_PRIVATE_KEY" ]; then
     exit 1
 fi
 
-echo "=== Deploying to Story Aeneid Testnet ==="
+echo "=== Deploying to Polygon Amoy Testnet ==="
 echo ""
 
 # 1. Deploy PointsRegistry
