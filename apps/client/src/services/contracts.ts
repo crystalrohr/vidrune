@@ -1,7 +1,7 @@
 /**
  * Vidrune Contract Interaction Service
  *
- * Wagmi/Viem hooks for interacting with Story smart contracts.
+ * Wagmi/Viem hooks for interacting with smart contracts.
  * All transactions are signed by users via their wallet.
  */
 import type { Address } from "viem";
@@ -60,7 +60,7 @@ export const useSubmitVideoIndex = () => {
       functionName: 'submitIndex',
       args: [videoId, walrusBlobId],
     });
-    
+
     return hash;
   };
 
@@ -176,7 +176,7 @@ export const useCreateMarket = () => {
       functionName: 'createMarket',
       args: [videoId, question],
     });
-    
+
     return hash;
   };
 
@@ -199,7 +199,7 @@ export const useVoteYes = () => {
       functionName: 'voteYes',
       args: [marketId],
     });
-    
+
     return hash;
   };
 
@@ -222,7 +222,7 @@ export const useVoteNo = () => {
       functionName: 'voteNo',
       args: [marketId],
     });
-    
+
     return hash;
   };
 
@@ -325,7 +325,7 @@ export const useSubmitConviction = () => {
       functionName: 'submitConviction',
       args: [videoId, proofBlobId],
     });
-    
+
     return hash;
   };
 

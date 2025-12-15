@@ -3,24 +3,24 @@ import { createConfig, http, custom } from "wagmi";
 import { anvil } from "viem/chains";
 import { isMiniPay } from "@/utils/minipay";
 
-// Story Aeneid Testnet chain configuration
-const storyAeneid = {
-  id: 1315,
-  name: "Story Aeneid Testnet",
+// Polygon Amoy Testnet chain configuration
+const polygonAmoy = {
+  id: 80002,
+  name: "Polygon Amoy",
   nativeCurrency: {
-    name: "IP",
-    symbol: "IP",
+    name: "POL",
+    symbol: "POL",
     decimals: 18,
   },
   rpcUrls: {
     default: {
-      http: ["https://rpc.ankr.com/story_aeneid_testnet"],
+      http: ["https://rpc-amoy.polygon.technology"],
     },
   },
   blockExplorers: {
     default: {
-      name: "Story Explorer",
-      url: "https://aeneid.storyscan.io/",
+      name: "Polygon Scan",
+      url: "https://amoy.polygonscan.com/",
     },
   },
 } as const;
@@ -33,7 +33,7 @@ const isAnvil = () => {
 
 // Get the appropriate chain based on environment
 const getChain = () => {
-  return isAnvil() ? anvil : storyAeneid;
+  return isAnvil() ? anvil : polygonAmoy;
 };
 
 // Use custom transport for MiniPay, otherwise use http
